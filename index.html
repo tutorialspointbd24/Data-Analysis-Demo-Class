@@ -93,10 +93,23 @@ section{margin-top:72px}
 .chip{font-size:0.7rem;font-weight:600;color:var(--text-m);background:rgba(91,79,255,0.07);border:1px solid var(--border);padding:4px 10px;border-radius:99px;}
 [data-theme="dark"] .chip{background:rgba(130,110,255,0.08)}
 
-/* ── Video block ── */
-.vbox{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:8px;box-shadow:var(--shadow-sm);overflow:hidden;}
-.vinner{position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,rgba(91,79,255,0.08),rgba(168,85,247,0.06));}
-.vinner video{position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:12px;display:block;background:#000;object-fit:contain;}
+/* ── Custom minimal YouTube player ── */
+.yt-wrap{position:relative;width:100%;margin-top:4px;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 8px 28px rgba(0,0,0,0.35);}
+.yt-box{position:relative;width:100%;padding-top:56.25%;}
+.yt-poster,.yt-frame{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;border-radius:14px;}
+.yt-poster{border:0;padding:0;margin:0;cursor:pointer;background:#000;overflow:hidden;}
+.yt-poster img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.78);transition:transform .45s ease,filter .45s ease;}
+.yt-poster:hover img{transform:scale(1.04);filter:brightness(0.9);}
+.yt-poster::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(0,0,0,0.1),rgba(0,0,0,0.45));pointer-events:none;}
+.yt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:74px;height:74px;border-radius:50%;background:linear-gradient(145deg,#5b4fff,#a855f7);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(91,79,255,0.55),0 0 0 6px rgba(255,255,255,0.12);transition:transform .25s ease,box-shadow .25s ease;z-index:2;}
+.yt-poster:hover .yt-play{transform:translate(-50%,-50%) scale(1.08);box-shadow:0 10px 34px rgba(91,79,255,0.7),0 0 0 8px rgba(255,255,255,0.18);}
+.yt-play svg{width:26px;height:26px;margin-left:4px;fill:#fff;}
+.yt-play::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);animation:ytp 2.4s ease-out infinite;}
+@keyframes ytp{0%{transform:scale(0.95);opacity:0.8}100%{transform:scale(1.35);opacity:0}}
+.yt-frame{display:none;}
+.yt-wrap.playing .yt-poster{display:none;}
+.yt-wrap.playing .yt-frame{display:block;}
+
 .vcap{display:flex;align-items:center;gap:8px;padding:12px 16px 8px;font-size:0.78rem;font-weight:600;color:var(--text-m);}
 .vcap-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 
@@ -133,6 +146,7 @@ section{margin-top:72px}
   .cards{grid-template-columns:1fr}
   .wrap{padding:0 16px 80px}
   .faq .fq-a{padding-left:20px}
+  .yt-play{width:60px;height:60px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -161,59 +175,61 @@ section{margin-top:72px}
   <div class="hero anim">
     <div class="hero-chip"><span class="dot"></span>Data Analysis Demo Class</div>
     <h1>Learn <span>Data Analysis</span> — Step by Step</h1>
-    <p>Excel, Power BI ও Python-& Career development Demo Class</p>
+    <p>Excel, Power BI, Python ও Career Development Demo Class</p>
   </div>
 
-  <!-- ════════ 1. RESOURCES & FAQ ════════ -->
-  <section class="anim">
-  
-  
-
-
-    
-  </section>
-
-  <div class="rule"></div>
-
-  <!-- ════════ 2. EXCEL DEMO ════════ -->
+  <!-- ════════ ১. EXCEL — SUM, SUMIF, SUMIFS ════════ -->
   <section class="anim">
     <div class="sec-head">
       <div class="sec-icon" style="background:linear-gradient(135deg,rgba(34,197,94,0.15),rgba(6,182,212,0.1));border:1px solid rgba(34,197,94,0.2)">📊</div>
       <div>
         <div class="sec-title">Excel Demo Class</div>
-        <div class="sec-desc">Goal Seek — What-If Analysis</div>
+        <div class="sec-desc">SUM, SUMIF, SUMIFS — হাতে-কলমে উদাহরণ</div>
       </div>
     </div>
     <div class="dcard anim">
       <div class="dtop">
         <div class="dico" style="background:linear-gradient(145deg,#22c55e,#15803d)">📈</div>
         <div>
-          <div class="dname">Excel — Goal Seek</div>
+          <div class="dname">Excel — SUM, SUMIF, SUMIFS</div>
           <span class="dtag" style="background:rgba(34,197,94,0.12);color:#22c55e;border:1px solid rgba(34,197,94,0.25)">Excel</span>
         </div>
       </div>
       <div class="dtopic">
-        <strong>Goal Seek</strong> — What-If Analysis টুল ব্যবহার করে কাঙ্ক্ষিত ফলাফল পেতে ইনপুট মান বের করুন। Target Value সেটআপ, By Changing Cell নির্বাচন ও রিয়েল ডেটাসেট দিয়ে প্র্যাকটিস।
+        <strong>SUM</strong> — একাধিক সেলের যোগফল · <strong>SUMIF</strong> — একটি শর্তে যোগফল · <strong>SUMIFS</strong> — একাধিক শর্তে যোগফল। রিয়েল ডেটাসেট দিয়ে প্র্যাকটিস।
       </div>
       <div class="dmeta">
         <span class="chip">⏱ ~25 min</span>
         <span class="chip">🎯 Beginner</span>
         <span class="chip">📁 Practice File</span>
       </div>
-      <div class="vinner" style="padding-top:56.25%;margin-top:4px">
-        <!-- 👇 এখানে Excel Goal Seek ডেমো ভিডিওর src বসান -->
-        <video src="Goal Seek.mp4" title="Excel Demo — Goal Seek" controls preload="metadata" playsinline></video>
+
+      <!-- 🎬 Excel: শুধু data-yt-id বদলান -->
+      <div class="yt-wrap" data-yt-id="VIDEO_ID_1" data-yt-title="Excel Demo — SUM, SUMIF, SUMIFS">
+        <div class="yt-box">
+          <button class="yt-poster" type="button" aria-label="Play video">
+            <img src="https://i.ytimg.com/vi/VIDEO_ID_1/maxresdefault.jpg"
+                 onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/VIDEO_ID_1/hqdefault.jpg';"
+                 alt="Video thumbnail" loading="lazy"/>
+            <span class="yt-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </button>
+          <iframe class="yt-frame" title="Excel Demo — SUM, SUMIF, SUMIFS"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
       </div>
       <div class="vcap" style="padding:0">
         <div class="vcap-dot" style="background:linear-gradient(135deg,#22c55e,#15803d)"></div>
-        Excel Demo — Goal Seek (What-If Analysis) Explained
+        Excel Demo — SUM, SUMIF &amp; SUMIFS Explained
       </div>
     </div>
   </section>
 
   <div class="rule"></div>
 
-  <!-- ════════ 3. POWER BI DEMO ════════ -->
+  <!-- ════════ ২. POWER BI — GAUGE CHART ════════ -->
   <section class="anim">
     <div class="sec-head">
       <div class="sec-icon" style="background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(234,179,8,0.1));border:1px solid rgba(245,158,11,0.2)">📉</div>
@@ -238,9 +254,22 @@ section{margin-top:72px}
         <span class="chip">🎯 Intermediate</span>
         <span class="chip">📊 KPI Visual</span>
       </div>
-      <div class="vinner" style="padding-top:56.25%;margin-top:4px">
-        <!-- 👇 এখানে Power BI ডেমো ভিডিওর src বসান -->
-        <video src="Gauge Chart.mp4" title="Power BI Demo — Gauge Chart" controls preload="metadata" playsinline></video>
+
+      <!-- 🎬 Power BI -->
+      <div class="yt-wrap" data-yt-id="VIDEO_ID_2" data-yt-title="Power BI Demo — Gauge Chart">
+        <div class="yt-box">
+          <button class="yt-poster" type="button" aria-label="Play video">
+            <img src="https://i.ytimg.com/vi/VIDEO_ID_2/maxresdefault.jpg"
+                 onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/VIDEO_ID_2/hqdefault.jpg';"
+                 alt="Video thumbnail" loading="lazy"/>
+            <span class="yt-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </button>
+          <iframe class="yt-frame" title="Power BI Demo — Gauge Chart"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
       </div>
       <div class="vcap" style="padding:0">
         <div class="vcap-dot" style="background:linear-gradient(135deg,#f59e0b,#d97706)"></div>
@@ -251,7 +280,7 @@ section{margin-top:72px}
 
   <div class="rule"></div>
 
-  <!-- ════════ 4. PYTHON DEMO ════════ -->
+  <!-- ════════ ৩. PYTHON — VARIABLE & DATA STRUCTURE ════════ -->
   <section class="anim">
     <div class="sec-head">
       <div class="sec-icon" style="background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(6,182,212,0.1));border:1px solid rgba(59,130,246,0.2)">🐍</div>
@@ -276,45 +305,22 @@ section{margin-top:72px}
         <span class="chip">🎯 Beginner</span>
         <span class="chip">💻 Code Along</span>
       </div>
-      <div class="vinner" style="padding-top:56.25%;margin-top:4px">
-        <!-- 👇 এখানে Python ডেমো ভিডিওর src বসান -->
-        <video src="python-demo.mp4" title="Python Demo — Variable &amp; Data Structures" controls preload="metadata" playsinline></video>
-      </div>
-      <div class="vcap" style="padding:0">
-        <div class="vcap-dot" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)"></div>
-        Python Demo — Variable &amp; Data Structures Explained
-      </div>
-    </div>
-  </section>
-  
-  
-   <section class="anim">
-    <div class="sec-head">
-      <div class="sec-icon" style="background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(6,182,212,0.1));border:1px solid rgba(59,130,246,0.2)">🐍</div>
-      <div>
-        <div class="sec-title">Python Demo Class</div>
-        <div class="sec-desc">Variable &amp; Data Structures</div>
-      </div>
-    </div>
-    <div class="dcard anim">
-      <div class="dtop">
-        <div class="dico" style="background:linear-gradient(145deg,#3b82f6,#1d4ed8)">🐍</div>
-        <div>
-          <div class="dname">Python — Variable &amp; Data Structures</div>
-          <span class="dtag" style="background:rgba(59,130,246,0.12);color:#3b82f6;border:1px solid rgba(59,130,246,0.25)">Python</span>
+
+      <!-- 🎬 Python -->
+      <div class="yt-wrap" data-yt-id="VIDEO_ID_3" data-yt-title="Python Demo — Variable &amp; Data Structures">
+        <div class="yt-box">
+          <button class="yt-poster" type="button" aria-label="Play video">
+            <img src="https://i.ytimg.com/vi/VIDEO_ID_3/maxresdefault.jpg"
+                 onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/VIDEO_ID_3/hqdefault.jpg';"
+                 alt="Video thumbnail" loading="lazy"/>
+            <span class="yt-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </button>
+          <iframe class="yt-frame" title="Python Demo — Variable &amp; Data Structures"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
-      </div>
-      <div class="dtopic">
-        <strong>Variable</strong> ডিক্লেয়ার ও টাইপ · <strong>List, Tuple, Set, Dictionary</strong> — কখন কোনটা ব্যবহার করবেন, উদাহরণসহ।
-      </div>
-      <div class="dmeta">
-        <span class="chip">⏱ ~35 min</span>
-        <span class="chip">🎯 Beginner</span>
-        <span class="chip">💻 Code Along</span>
-      </div>
-      <div class="vinner" style="padding-top:56.25%;margin-top:4px">
-        <!-- 👇 এখানে Python ডেমো ভিডিওর src বসান -->
-        <video src="python-demo.mp4" title="Python Demo — Variable &amp; Data Structures" controls preload="metadata" playsinline></video>
       </div>
       <div class="vcap" style="padding:0">
         <div class="vcap-dot" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)"></div>
@@ -325,7 +331,58 @@ section{margin-top:72px}
 
   <div class="rule"></div>
 
-  <!-- ════════ 5. CAREER GUIDELINES ════════ -->
+  <!-- ════════ ৪. CAREER DEV — PORTFOLIO GENERATOR USING AI ════════ -->
+  <section class="anim">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(236,72,153,0.1));border:1px solid rgba(168,85,247,0.2)">🤖</div>
+      <div>
+        <div class="sec-title">Career Development Demo Class</div>
+        <div class="sec-desc">Portfolio Generator Using AI</div>
+      </div>
+    </div>
+    <div class="dcard anim">
+      <div class="dtop">
+        <div class="dico" style="background:linear-gradient(145deg,#a855f7,#7c3aed)">🧠</div>
+        <div>
+          <div class="dname">Portfolio Generator Using AI</div>
+          <span class="dtag" style="background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.25)">Career Dev</span>
+        </div>
+      </div>
+      <div class="dtopic">
+        <strong>AI দিয়ে পোর্টফোলিও তৈরি</strong> — প্রম্পট লেখা, টেমপ্লেট কাস্টমাইজ, প্রজেক্ট ও স্কিল সেকশন সাজানো এবং লাইভ ডিপ্লয় করা পর্যন্ত সম্পূর্ণ গাইড।
+      </div>
+      <div class="dmeta">
+        <span class="chip">⏱ ~30 min</span>
+        <span class="chip">🎯 Beginner</span>
+        <span class="chip">🤖 AI Tool</span>
+      </div>
+
+      <!-- 🎬 Career Dev -->
+      <div class="yt-wrap" data-yt-id="VIDEO_ID_4" data-yt-title="Career Dev — Portfolio Generator Using AI">
+        <div class="yt-box">
+          <button class="yt-poster" type="button" aria-label="Play video">
+            <img src="https://i.ytimg.com/vi/VIDEO_ID_4/maxresdefault.jpg"
+                 onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/VIDEO_ID_4/hqdefault.jpg';"
+                 alt="Video thumbnail" loading="lazy"/>
+            <span class="yt-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </button>
+          <iframe class="yt-frame" title="Career Dev — Portfolio Generator Using AI"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="vcap" style="padding:0">
+        <div class="vcap-dot" style="background:linear-gradient(135deg,#a855f7,#7c3aed)"></div>
+        Career Dev Demo — Portfolio Generator Using AI
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- ════════ ৫. CAREER GUIDELINES ════════ -->
   <section class="anim">
     <div class="sec-head">
       <div class="sec-icon" style="background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(236,72,153,0.1));border:1px solid rgba(168,85,247,0.2)">🚀</div>
@@ -361,6 +418,7 @@ section{margin-top:72px}
 </div>
 
 <script>
+/* ── Theme toggle ── */
 const html=document.documentElement;
 const tog=document.getElementById('tog');
 const saved=localStorage.getItem('tp-da-theme');
@@ -370,12 +428,35 @@ tog.addEventListener('click',()=>{
   html.setAttribute('data-theme',next);
   localStorage.setItem('tp-da-theme',next);
 });
+
+/* ── Scroll reveal ── */
 const io=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
 },{threshold:0.08});
 document.querySelectorAll('.anim').forEach(el=>io.observe(el));
 document.querySelectorAll('.ccard,.dcard,.faq,.citem').forEach((el,i)=>{
   el.style.transitionDelay=(i*50)+'ms';
+});
+
+/* ── Minimal YouTube player ── */
+document.querySelectorAll('.yt-wrap').forEach(wrap=>{
+  const id   = wrap.dataset.ytId;
+  const poster=wrap.querySelector('.yt-poster');
+  const frame =wrap.querySelector('.yt-frame');
+  poster.addEventListener('click',()=>{
+    // ইউটিউব প্যারাম: ব্র্যান্ডিং/অ্যানোটেশন লুকানো, রিলেটেড ভিডিও ব্লক
+    const params = new URLSearchParams({
+      autoplay:'1',
+      rel:'0',
+      modestbranding:'1',
+      playsinline:'1',
+      iv_load_policy:'3',
+      cc_load_policy:'0'
+    });
+    frame.src = `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`;
+    wrap.classList.add('playing');
+    frame.focus();
+  });
 });
 </script>
 </body>
